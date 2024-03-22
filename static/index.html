@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html data-theme="sunset" lang="en">
+<head>
+    <title>Signs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.13.7/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/dist/cdn.min.js"></script>
+    <script src="data.js"></script>
+</head>
+<body class="container w-96 mx-auto grid grid-cols-1 justify-center gap-y-4 mt-4">
+<div x-data="signs">
+    <div>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-title">Sign progress</div>
+                <div class="stat-value" x-text="current.progress + '/3'"></div>
+                <div class="stat-desc">Correct answers in a row</div>
+                <div class="stat-actions">
+                    <button @click="resetCurrent()" class="btn btn-ghost btn-sm">Reset</button>
+                </div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">Total progress</div>
+                <div class="stat-value" x-text="done.length + '/' + signsCollection.length"></div>
+                <div class="stat-desc">Signs you know</div>
+                <div class="stat-actions">
+                    <button @click="reset()" class="btn btn-ghost btn-sm">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div x-show="!finish" class="mx-4">
+        <div class="flex justify-center bg-neutral-100 rounded-2xl">
+            <div class="w-64"><img class="p-2" :src="current.img" alt="warning"></div>
+        </div>
+        <p x-show="!hide" class="my-2" x-text="current.text"></p>
+        <div class="mt-4 flex justify-center gap-3">
+            <button x-show="hide" @click="hide=!hide" class="btn btn-primary grow">Show answer</button>
+            <button x-show="!hide" @click="correct();hide=!hide" class="btn btn-accent grow">Correct</button>
+            <button x-show="!hide" @click="wrong();hide=!hide" class="btn btn-secondary grow">Wrong</button>
+        </div>
+    </div>
+    <div x-show="finish" class="mx-4">
+        <div class="flex justify-center bg-neutral-100 rounded-2xl">
+            <div class="w-64"><img class="p-2" src="https://img.icons8.com/ios/452/checked.png" alt="warning"></div>
+        </div>
+        <p class="my-2">You have finished all the signs!</p>
+        <div class="mt-4 flex justify-center gap-3">
+            <button @click="reset()" class="btn btn-primary grow">Restart</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('signs', function () {
+            return {
+                queue: this.$persist(JSON.parse(JSON.stringify(signsCollection.sort(() => Math.random() - 0.5)))),
+                done: this.$persist([]),
+                current: this.$persist(null),
+                hide: true,
+                finish: false,
+                init() {
+                    if (this.current === null) {
+                        this.next()
+                    }
+                },
+                next() {
+                    if (this.queue.length === 0) {
+                        this.finish = true
+                        return
+                    }
+                    this.current = this.queue.shift()
+                },
+                wrong() {
+                    this.current.progress = 0
+                    this.queue.push(this.current)
+                    this.next()
+                },
+                correct() {
+                    this.current.progress += 1
+                    if (this.current.progress < 3) {
+                        this.queue.push(this.current)
+                    } else {
+                        this.done.push(this.current)
+                    }
+                    this.next()
+                },
+                reset() {
+                    this.queue = JSON.parse(JSON.stringify(signsCollection.sort(() => Math.random() - 0.5)))
+                    this.done = []
+                    this.hide = true
+                    this.finish = false
+                    this.next()
+                },
+                resetCurrent() {
+                    this.current.progress = 0
+                }
+            }
+        })
+    })
+</script>
