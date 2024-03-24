@@ -9,8 +9,10 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/dist/cdn.min.js"></script>
     <script src="data.js"></script>
 </head>
-<style>[x-cloak] { display: none !important; }</style>
-<body class="container w-96 mx-auto grid grid-cols-1 justify-center gap-y-4 mt-4">
+<style>[x-cloak] {
+    display: none !important;
+}</style>
+<body class="container w-96 mx-auto grid grid-cols-1 justify-center gap-y-4 mt-4 content-between">
 <div x-cloak x-data="signs">
     <div>
         <div class="stats">
@@ -20,6 +22,7 @@
                 <div class="stat-desc">Correct answers in a row</div>
                 <div class="stat-actions">
                     <button @click="resetCurrent()" class="btn btn-ghost btn-sm">Reset</button>
+                    <button @click="doneCurrent()" class="btn btn-ghost btn-sm">Done</button>
                 </div>
             </div>
             <div class="stat">
@@ -32,27 +35,38 @@
             </div>
         </div>
     </div>
-    <div x-show="!finish" class="mx-4">
-        <div class="flex justify-center bg-neutral-100 rounded-2xl">
-            <div class="w-64"><img class="p-2" :src="current.img" alt="warning"></div>
+    <div>
+        <div x-show="!finish" class="mx-4">
+            <div class="flex justify-center bg-neutral-100 rounded-2xl">
+                <div class="w-64"><img class="p-2" :src="current.img" alt="warning"></div>
+            </div>
+            <p x-show="!hide" class="my-2" x-text="current.text"></p>
+            <div class="mt-4 flex justify-center gap-3">
+                <button x-show="hide" @click="hide=!hide" class="btn btn-primary grow">Show answer</button>
+                <button x-show="!hide" @click="correct();hide=!hide" class="btn btn-accent grow">Correct</button>
+                <button x-show="!hide" @click="wrong();hide=!hide" class="btn btn-secondary grow">Wrong</button>
+            </div>
         </div>
-        <p x-show="!hide" class="my-2" x-text="current.text"></p>
-        <div class="mt-4 flex justify-center gap-3">
-            <button x-show="hide" @click="hide=!hide" class="btn btn-primary grow">Show answer</button>
-            <button x-show="!hide" @click="correct();hide=!hide" class="btn btn-accent grow">Correct</button>
-            <button x-show="!hide" @click="wrong();hide=!hide" class="btn btn-secondary grow">Wrong</button>
-        </div>
-    </div>
-    <div x-show="finish" class="mx-4">
-        <div class="flex justify-center bg-neutral-100 rounded-2xl">
-            <div class="w-64"><img class="p-2" src="https://img.icons8.com/ios/452/checked.png" alt="warning"></div>
-        </div>
-        <p class="my-2">You have finished all the signs!</p>
-        <div class="mt-4 flex justify-center gap-3">
-            <button @click="reset()" class="btn btn-primary grow">Restart</button>
+        <div x-show="finish" class="mx-4">
+            <div class="flex justify-center bg-neutral-100 rounded-2xl">
+                <div class="w-64"><img class="p-2" src="https://img.icons8.com/ios/452/checked.png" alt="warning"></div>
+            </div>
+            <p class="my-2">You have finished all the signs!</p>
+            <div class="mt-4 flex justify-center gap-3">
+                <button @click="reset()" class="btn btn-primary grow">Restart</button>
+            </div>
         </div>
     </div>
 </div>
+<footer class="footer footer-center text-base-content fixed bottom-4 w-96">
+    <p>
+        This is a simple web app to help you learn traffic signs. Click on the "Show answer" button to see the answer and
+        then click on "Correct" or "Wrong" depending on whether you know the sign or not. The app will keep track of your progress. Good luck!
+    </p>
+    <aside>
+        <p>Made by <a href="https://github.com/maximdanilchenko">Maksim Danilchenko</a></p>
+    </aside>
+</footer>
 </body>
 </html>
 <script>
@@ -99,6 +113,10 @@
                 },
                 resetCurrent() {
                     this.current.progress = 0
+                },
+                doneCurrent() {
+                    this.done.push(this.current)
+                    this.next()
                 }
             }
         })
