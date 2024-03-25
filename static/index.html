@@ -7,12 +7,12 @@
     <link href="./output.css" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.13.7/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/dist/cdn.min.js"></script>
-    <script src="data.js"></script>
+    <script src="signs.js"></script>
 </head>
 <style>[x-cloak] {
     display: none !important;
 }</style>
-<body class="container w-96 mx-auto h-screen grid grid-cols-1 justify-center gap-y-4 py-4 content-between">
+<body class="container w-96 mx-auto h-screen grid grid-cols-1 justify-center py-4 content-between">
 <div x-cloak x-data="signs">
     <div>
         <div class="stats">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="mt-4">
         <div x-show="!finish" class="mx-4">
             <div class="flex justify-center bg-neutral-100 rounded-2xl">
                 <div class="w-64"><img class="p-2" :src="current.img" alt="warning"></div>
@@ -64,7 +64,7 @@
         then click on "Correct" or "Wrong" depending on whether you know the sign or not. The app will keep track of your progress. Good luck!
     </p>
     <aside>
-        <p>Made by <a href="https://github.com/maximdanilchenko">Maksim Danilchenko</a></p>
+        <p><a class="link link-hover" href="https://github.com/maximdanilchenko/signs" target="_blank">Source code</a></p>
     </aside>
 </footer>
 </body>
