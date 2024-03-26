@@ -13,7 +13,53 @@
     display: none !important;
 }</style>
 <body class="container w-96 mx-auto h-screen grid grid-cols-1 justify-center py-4 content-between">
-<div x-cloak x-data="signs">
+<div x-cloak x-data="{
+                queue: $persist(JSON.parse(JSON.stringify(signsCollection.sort(() => Math.random() - 0.5)))),
+                done: $persist([]),
+                current: $persist(null),
+                hide: true,
+                finish: false,
+                init() {
+                    if (this.current === null) {
+                        this.next()
+                    }
+                },
+                next() {
+                    if (this.queue.length === 0) {
+                        this.finish = true
+                        return
+                    }
+                    this.current = this.queue.shift()
+                },
+                wrong() {
+                    this.current.progress = 0
+                    this.queue.push(this.current)
+                    this.next()
+                },
+                correct() {
+                    this.current.progress += 1
+                    if (this.current.progress < 3) {
+                        this.queue.push(this.current)
+                    } else {
+                        this.done.push(this.current)
+                    }
+                    this.next()
+                },
+                reset() {
+                    this.queue = JSON.parse(JSON.stringify(signsCollection.sort(() => Math.random() - 0.5)))
+                    this.done = []
+                    this.hide = true
+                    this.finish = false
+                    this.next()
+                },
+                resetCurrent() {
+                    this.current.progress = 0
+                },
+                doneCurrent() {
+                    this.done.push(this.current)
+                    this.next()
+                }
+            }">
     <div>
         <div class="stats">
             <div class="stat">
@@ -60,65 +106,15 @@
 </div>
 <footer class="footer footer-center text-base-content">
     <p>
-        This is a simple web app to help you learn traffic signs. Click on the "Show answer" button to see the answer and
-        then click on "Correct" or "Wrong" depending on whether you know the sign or not. The app will keep track of your progress. Good luck!
+        This is a simple web app to help you learn traffic signs. Click on the "Show answer" button to see the answer
+        and
+        then click on "Correct" or "Wrong" depending on whether you know the sign or not. The app will keep track of
+        your progress. Good luck!
     </p>
     <aside>
-        <p><a class="link link-hover" href="https://github.com/maximdanilchenko/signs" target="_blank">Source code</a></p>
+        <p><a class="link link-hover" href="https://github.com/maximdanilchenko/signs" target="_blank">Source code</a>
+        </p>
     </aside>
 </footer>
 </body>
 </html>
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('signs', function () {
-            return {
-                queue: this.$persist(JSON.parse(JSON.stringify(signsCollection.sort(() => Math.random() - 0.5)))),
-                done: this.$persist([]),
-                current: this.$persist(null),
-                hide: true,
-                finish: false,
-                init() {
-                    if (this.current === null) {
-                        this.next()
-                    }
-                },
-                next() {
-                    if (this.queue.length === 0) {
-                        this.finish = true
-                        return
-                    }
-                    this.current = this.queue.shift()
-                },
-                wrong() {
-                    this.current.progress = 0
-                    this.queue.push(this.current)
-                    this.next()
-                },
-                correct() {
-                    this.current.progress += 1
-                    if (this.current.progress < 3) {
-                        this.queue.push(this.current)
-                    } else {
-                        this.done.push(this.current)
-                    }
-                    this.next()
-                },
-                reset() {
-                    this.queue = JSON.parse(JSON.stringify(signsCollection.sort(() => Math.random() - 0.5)))
-                    this.done = []
-                    this.hide = true
-                    this.finish = false
-                    this.next()
-                },
-                resetCurrent() {
-                    this.current.progress = 0
-                },
-                doneCurrent() {
-                    this.done.push(this.current)
-                    this.next()
-                }
-            }
-        })
-    })
-</script>
