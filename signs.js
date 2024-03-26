@@ -5,42 +5,42 @@ signsCollection = [
         "progress": 0,
     },
     {
-        "text": "Uneven road",//
+        "text": "Uneven road", //
         "img": "./signs/002-uneven.png",
         "progress": 0,
     },
     {
-        "text": "Slippery road",
+        "text": "Slippery road",//
         "img": "./signs/003-slippery-road.png",
         "progress": 0,
     },
     {
-        "text": "No entry",
+        "text": "No entry",//
         "img": "./signs/004-no-entry.png",
         "progress": 0,
     },
     {
-        "text": "No right turn",
+        "text": "Dead end road",//
         "img": "./signs/005-no-right-turn.png",
         "progress": 0,
     },
     {
-        "text": "Road narrows on both sides",
+        "text": "Road narrows on both sides", //
         "img": "./signs/006-narrow.png",
         "progress": 0,
     },
     {
-        "text": "One way traffic",
+        "text": "Move forward",//
         "img": "./signs/007-one-way.png",
         "progress": 0,
     },
     {
-        "text": "Keep right",
+        "text": "Keep right",//
         "img": "./signs/008-keep-right.png",
         "progress": 0,
     },
     {
-        "text": "No overtaking",
+        "text": "No overtaking",//
         "img": "./signs/009-no-overtaking.png",
         "progress": 0,
     },
@@ -50,12 +50,12 @@ signsCollection = [
         "progress": 0,
     },
     {
-        "text": "Level crossing ahead",
+        "text": "Junction with controlled level crossings",
         "img": "./signs/011-level.png",
         "progress": 0,
     },
     {
-        "text": "Turn left",
+        "text": "Turn left",//
         "img": "./signs/012-turn-left.png",
         "progress": 0,
     },
@@ -90,7 +90,7 @@ signsCollection = [
         "progress": 0,
     },
     {
-        "text": "Dangerous bend to the left",
+        "text": "Dangerous bend to the left",//
         "img": "./signs/019-curve.png",
         "progress": 0,
     },
@@ -100,7 +100,7 @@ signsCollection = [
         "progress": 0,
     },
     {
-        "text": "No left turn",
+        "text": "No left turn",//
         "img": "./signs/021-no-turn-left.png",
         "progress": 0,
     },
@@ -110,32 +110,32 @@ signsCollection = [
         "progress": 0,
     },
     {
-        "text": "One way traffic",
+        "text": "End of one way traffic",//
         "img": "./signs/023-one-way-2.png",
         "progress": 0,
     },
     {
-        "text": "Double curve",
+        "text": "Double bend or more the first to the left",//
         "img": "./signs/024-double-curve.png",
         "progress": 0,
     },
     {
-        "text": "No parking",
+        "text": "No parking",//
         "img": "./signs/025-no-parking.png",
         "progress": 0,
     },
     {
-        "text": "No stopping",
+        "text": "No stopping or parking",//
         "img": "./signs/026-no-stopping.png",
         "progress": 0,
     },
     {
-        "text": "No U-turn",
+        "text": "No U-turn",//
         "img": "./signs/027-no-u-turn.png",
         "progress": 0,
     },
     {
-        "text": "No way",
+        "text": "Road closed to all traffic in both directions",//
         "img": "./signs/028-no-way.png",
         "progress": 0,
     },
@@ -150,37 +150,37 @@ signsCollection = [
         "progress": 0,
     },
     {
-        "text": "Priority road",
+        "text": "Priority to traffic in your direction",
         "img": "./signs/031-priority-1.png",
         "progress": 0,
     },
     {
-        "text": "One way traffic",
+        "text": "One way traffic",//
         "img": "./signs/032-one-way-3.png",
         "progress": 0,
     },
     {
-        "text": "Tunnel ahead",
+        "text": "Tunnel ahead",//
         "img": "./signs/033-tunnel.png",
         "progress": 0,
     },
     {
-        "text": "Turn right",
+        "text": "Turn right or left",//
         "img": "./signs/034-turn.png",
         "progress": 0,
     },
     {
-        "text": "U-turn",
+        "text": "U-turn",//
         "img": "./signs/035-u-turn.png",
         "progress": 0,
     },
     {
-        "text": "Yield",
+        "text": "Approaching road with priority right. Give way",//
         "img": "./signs/036-yield.png",
         "progress": 0,
     },
     {
-        "text": "Yield",
+        "text": "Priority to vehicles coming from opposite direction",//
         "img": "./signs/037-yield-1.png",
         "progress": 0,
     },
